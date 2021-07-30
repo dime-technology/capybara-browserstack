@@ -34,9 +34,17 @@ Capybara.register_driver :browserstack do |app|
 end
 
 Capybara.default_driver = :browserstack
+# Capybara.default_driver = :selenium_chrome_headless
 Capybara.run_server = false
 
 # Code to stop browserstack local after end of test
 at_exit do
+
+  # driver = Capybara.drivers[:browserstack]&.call
+  # if driver.present?
+  #   status = page.has_text?("Thank you for your donation") ? "passed" : "failed"
+  #   driver.execute_script(%Q{browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"#{status}"}}})
+  # end
+
   @bs_local.stop unless @bs_local.nil?
 end
